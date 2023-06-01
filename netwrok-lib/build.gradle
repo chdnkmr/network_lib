@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'maven-publish'
 }
 
 android {
@@ -68,4 +69,17 @@ dependencies {
 // Allow references to generated code
 kapt {
     correctErrorTypes = true
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication){
+                from components.release
+                groupId = 'com.github.chdnkmr'
+                artifactId = 'common-network-lib'
+                version = '1.0'
+            }
+        }
+    }
 }
